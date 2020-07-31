@@ -7,6 +7,7 @@ import org.jsoup.select.Elements;
 
 import java.time.LocalDate;
 import java.time.format.TextStyle;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -28,6 +29,10 @@ public class TimeTableParser {
         String today = getToday();
 
         int dayOfWeekIndex = getTodayTimeTableColumn(table, today);
+
+        if(dayOfWeekIndex == -1) {
+            return Collections.EMPTY_MAP;
+        }
 
         Map<String, String> timeTable = new LinkedHashMap<>();
 
@@ -54,8 +59,6 @@ public class TimeTableParser {
         Elements daysRow = timeTable.child(1).child(0).children();
 
         for (Element element : daysRow) {
-            System.out.println(element);
-
             if (element.text().equalsIgnoreCase(today)) {
                 return dayOfWeekIndex;
             }
@@ -63,6 +66,6 @@ public class TimeTableParser {
             dayOfWeekIndex++;
         }
 
-        throw new RuntimeException("Today column in time table not found.");
+       return -1;
     }
 }

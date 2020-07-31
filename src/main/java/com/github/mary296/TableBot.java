@@ -15,16 +15,19 @@ public class TableBot extends TelegramLongPollingBot {
     public void onUpdateReceived(Update update) {
         Map<String, String> timeTable = TimeTableParser.getTodayTimeTable();
         StringBuilder messageBuilder = new StringBuilder();
+        messageBuilder.append("```");
         timeTable.forEach((time, lesson) -> {
             if (!lesson.isEmpty()) {
-                messageBuilder.append("`");
                 messageBuilder.append(String.format("%5s", time));
                 messageBuilder.append("  ");
                 messageBuilder.append(lesson);
-                messageBuilder.append("`");
                 messageBuilder.append("\n");
             }
         });
+        messageBuilder.append('\n');
+        messageBuilder.append(WeatherParser.getWeatherData());
+        messageBuilder.append("```");
+
         String message = messageBuilder.toString();
         SendMessage command = new SendMessage() // Create a SendMessage object with mandatory fields
                 .setChatId(update.getMessage().getChatId())
