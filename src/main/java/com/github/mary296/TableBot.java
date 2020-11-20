@@ -13,6 +13,17 @@ public class TableBot extends TelegramLongPollingBot {
     }
 
     public void onUpdateReceived(Update update) {
+{
+        SendMessage command = new SendMessage() // Create a SendMessage object with mandatory fields
+                .setChatId(update.getMessage().getChatId())
+                .setParseMode("Markdown")
+                .setText("message");
+        try {
+            execute(command); // Call method to send the message
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+}
         Map<String, String> timeTable = TimeTableParser.getTodayTimeTable();
         StringBuilder messageBuilder = new StringBuilder();
         messageBuilder.append("```");
