@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class TimeTableParser {
     public static Map<String, String> getTodayTimeTable() {
-        String siteUrl = "https://table.nsu.ru/group/17112";
+        String siteUrl = "https://table.nsu.ru/group/17133";
 
         Document doc;
         try {
