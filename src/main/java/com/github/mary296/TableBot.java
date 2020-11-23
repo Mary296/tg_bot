@@ -18,9 +18,16 @@ public class TableBot extends TelegramLongPollingBot {
     public TableBot() {
         LocalDateTime now = LocalDateTime.now();
 
-        LocalDateTime sendTime = now.withHour(12).withMinute(5).withSecond(0);
+        System.out.println(now);
+
+        LocalDateTime sendTime = now.withHour(12).withMinute(10).withSecond(0);
+
+        System.out.println(sendTime);
 
         Duration between = Duration.between(sendTime, now);
+
+        System.out.println(between);
+        System.out.println(between.getSeconds());
 
         Executors.newSingleThreadScheduledExecutor()
                 .scheduleAtFixedRate(() -> getDataAndSend(userId), between.getSeconds(), TimeUnit.DAYS.toSeconds(1), TimeUnit.SECONDS);
