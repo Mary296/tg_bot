@@ -24,7 +24,7 @@ public class TableBot extends TelegramLongPollingBot {
 
         System.out.println(sendTime);
 
-        Duration between = Duration.between(sendTime, now);
+        Duration between = Duration.between(now, sendTime);
 
         System.out.println(between);
         System.out.println(between.getSeconds());
